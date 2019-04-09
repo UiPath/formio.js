@@ -121,7 +121,7 @@ export default class Wizard extends Webform {
   }
 
   beforeNext() {
-    if (this.options.hooks.hasOwnProperty('beforeNext')) {
+    if (this.options.hooks && this.options.hooks.hasOwnProperty('beforeNext')) {
       return this.hook('beforeNext', this.currentPage, this.submission);
     }
     return super.beforeNext();
