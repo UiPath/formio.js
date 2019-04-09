@@ -120,6 +120,13 @@ export default class Wizard extends Webform {
     }));
   }
 
+  beforeNext() {
+    if (this.options.hooks.hasOwnProperty('beforeNext')) {
+      return this.hook('beforeNext', this.currentPage, this.submission);
+    }
+    return super.beforeNext();
+  }
+
   nextPage() {
     // Read-only forms should not worry about validation before going to next page, nor should they submit.
     if (this.options.readOnly) {
