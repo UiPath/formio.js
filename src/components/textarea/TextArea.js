@@ -274,6 +274,31 @@ export default class TextAreaComponent extends TextFieldComponent {
     return value;
   }
 
+  removeTagsFromString(value) {
+    if (!value) {
+      return;
+    }
+
+    const removeEditorBlank = function(input) {
+      if (typeof input !== 'string') {
+        return input;
+      }
+
+      return input.replace(/<(.*?)>/g, '');
+    };
+
+    if (Array.isArray(value)) {
+      value.forEach((input, index) => {
+        value[index] = removeEditorBlank(input);
+      });
+    }
+    else {
+      value = removeEditorBlank(value);
+    }
+
+    return value;
+  }
+
   hasChanged(before, after) {
     return super.hasChanged(this.removeBlanks(before), this.removeBlanks(after));
   }

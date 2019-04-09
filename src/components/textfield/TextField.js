@@ -135,7 +135,8 @@ export default class TextFieldComponent extends BaseComponent {
       this.setCounter('words', this.wordCount, this.dataValue.trim().split(/\s+/).length, this.maxWordCount);
     }
     if (this.charCount) {
-      this.setCounter('characters', this.charCount, this.dataValue.length, this.maxCharCount);
+      const value = this.component.wysiwyg ? this.removeTagsFromString(this.dataValue) : this.dataValue;
+      this.setCounter('characters', this.charCount, value.length, this.maxCharCount);
     }
   }
 
